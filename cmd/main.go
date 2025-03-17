@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	// Inicializa a conexão com o banco de dados (sqlite)
+	// Inicializa a conexão com o banco de dados (mysql)
 	database.InitDB()
 
 	// Cria uma nova instância do servidor Gin com configurações padrão
