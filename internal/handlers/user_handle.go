@@ -44,3 +44,23 @@ func PostUser(ctx *gin.Context) {
 		"user":    response.NewUserResponse(res), // Converte User para UserResponse para esconder dados sensíveis
 	})
 }
+
+func GetUser(ctx *gin.Context) {
+	res, err := services.GetUserListService()
+
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	if len(res) == 0 {
+		ctx.JSON(http.StatusOK, gin.H{
+			"message": "Nenhum usuário encontrado",
+		})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"message": "Usuários listado com sucesso!",
+		"user":    res,
+	})
+}

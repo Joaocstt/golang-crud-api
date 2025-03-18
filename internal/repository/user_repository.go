@@ -3,6 +3,7 @@ package repository
 import (
 	"api/internal/database"
 	"api/internal/models"
+	"errors"
 	"github.com/google/uuid" // Importa a biblioteca para gerar UUIDs (Identificadores Únicos)
 )
 
@@ -21,4 +22,15 @@ func CreateUser(user *models.User) (*models.User, error) {
 
 	// Se não houver erro, retorna o usuário criado
 	return user, nil
+}
+
+func GetUserList() ([]*models.User, error) {
+	var users []*models.User
+
+	res := database.DB.Find(&users)
+	if res.Error != nil {
+		return nil, errors.New("Nenhum usuário encontrado")
+	}
+
+	return users, nil
 }
